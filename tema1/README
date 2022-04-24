@@ -1,0 +1,32 @@
+// 322 Andrada-Ioana Cojocaru
+
+ROTP
+- iteram prin plaintext pana cand ecx este mai mare sau egal cu 0
+- pentru plaintext avem contor de la 0 la len - 1 (ebx)
+- pentru key avem contor de la len - 1 la 0 (ecx)
+- copiem in ah plain[i] si apoi facem xor in acelasi registru cu key[len-i-1]
+- mutam rezultatul in edx
+- incrementam ebx, decrementam ecx
+
+AGES
+- punem in ecx doar 0
+- in eax salvam diferenta dintre anul curent si anul nasterii
+- tratam mai multe cazuri:
+1) anul nasterii este mai mare sau egal cu anul prezent, astfel ca ne intoarcem
+in get_ages stiind ca valoarea curenta va fi 0
+2) anul este mai mic, verificam luna nasterii care este mai mare decat luna
+prezenta, astfel ca trebuie sa scadem varsta, mergem la dec_age
+3) anul este mai mic, luna nasterii este mai mica decat luna curenta, astfel
+mergem sa adaugam rezultatul in vectorul all_ages
+4) anul este mai mic, luna nasterii este egala cu luna curenta, cercetam ziua,
+daca aceasta este mica decat ziua nasterii, decrementam varsta mergand in
+functia dec_age
+5) anul este mai mic, luna egala, ziua mai mare, mergem direct in functia de
+adaugare in vectorul all_ages
+- adaugam in vectorul all_ages, daca este cazul
+
+COLUMNAR
+- parcurgem vectorul key, iar pentru fiecare valoare extragem literele
+corespunzatoare din haystack pe care le punem in ordine in ciphertext
+- ne folosim de stiva pentru a salva valoarea lui ecx, nedetinand destule
+registre pentru toate operatiile si contoarele
